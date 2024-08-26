@@ -5,13 +5,15 @@ import com.sparta.skilledproject.dto.RequestDto;
 import com.sparta.skilledproject.dto.ResponseDto;
 import com.sparta.skilledproject.entity.Schedule;
 import com.sparta.skilledproject.service.ScheduleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/schedules")
+@RequiredArgsConstructor
 public class ScheduleController {
 
-    private ScheduleService scheduleService;
+    private final ScheduleService scheduleService;
 
     //저장
     @PostMapping
@@ -33,6 +35,4 @@ public class ScheduleController {
 
         return  scheduleService.updateSchedule(id,requestDto);
     }
-
-    Schedule schedule = new Schedule()
 }
