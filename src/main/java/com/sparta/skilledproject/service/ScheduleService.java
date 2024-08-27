@@ -5,7 +5,10 @@ import com.sparta.skilledproject.dto.ResponseDto;
 import com.sparta.skilledproject.entity.Schedule;
 import com.sparta.skilledproject.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -40,9 +43,13 @@ public class ScheduleService {
         schedule.setUsername(requestDto.getUsername());
         schedule.setTitle(requestDto.getTitle());
         schedule.setContent(requestDto.getContent());
-
-
         return new ResponseDto(scheduleRepository.save(schedule));
-
     }
+
+    // 페이지네이션 처리된 스케줄 조회
+    public Page<ResponseDto> getSchedules(Pageable pageable) {
+        return scheduleRepository.findByOrderByUpdatedAtDesc(pageable)
+                .map(ResponseDto::new);
+
+        }
 }

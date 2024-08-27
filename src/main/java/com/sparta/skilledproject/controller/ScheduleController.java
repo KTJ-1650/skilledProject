@@ -6,6 +6,9 @@ import com.sparta.skilledproject.dto.ResponseDto;
 import com.sparta.skilledproject.entity.Schedule;
 import com.sparta.skilledproject.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,5 +37,11 @@ public class ScheduleController {
     public ResponseDto updateSchedule(@PathVariable Long id ,@RequestBody RequestDto requestDto){
 
         return  scheduleService.updateSchedule(id,requestDto);
+    }
+
+    //페이지네이션 스케쥴 조회
+    @GetMapping
+    public Page<ResponseDto> getSchedules(Pageable pageable) {
+        return scheduleService.getSchedules(pageable);
     }
 }
