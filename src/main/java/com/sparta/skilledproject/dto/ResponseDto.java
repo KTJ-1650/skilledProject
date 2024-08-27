@@ -1,14 +1,16 @@
 package com.sparta.skilledproject.dto;
 
+import com.sparta.skilledproject.entity.Schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
+
 public class ResponseDto {
 
     private Long id;
@@ -20,5 +22,13 @@ public class ResponseDto {
 
     public ResponseDto() {
 
+    }
+    public ResponseDto(Schedule schedule) {
+        this.id = schedule.getId();
+        this.username = schedule.getUsername();
+        this.title = schedule.getTitle();
+        this.content = schedule.getContent();
+        this.createdAt = schedule.getCreatedAt();
+        this.updatedAt = schedule.getUpdatedAt();
     }
 }
