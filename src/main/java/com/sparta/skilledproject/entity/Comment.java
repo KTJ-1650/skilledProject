@@ -22,8 +22,9 @@ public class Comment {
     private String author;
     private String content;
 
-    @CreatedDate  // 생성일 자동 설정
-    @Column(updatable = false)  // 생성일은 업데이트되지 않도록 설정
+
+    @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate

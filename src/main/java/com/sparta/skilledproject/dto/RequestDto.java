@@ -14,7 +14,7 @@ public class RequestDto {
     private String username;
     private String title;
     private String content;
-    private LocalDateTime createdAt;  // 생성일 포함
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public RequestDto(){
