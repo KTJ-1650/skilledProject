@@ -44,4 +44,10 @@ public class ScheduleController {
     public Page<ResponseDto> getSchedules(Pageable pageable) {
         return scheduleService.getSchedules(pageable);
     }
+
+    //일정삭제하면 댓글도 같이 삭제
+    @DeleteMapping("/delete/{id}")
+    public ResponseDto deleteSchedule(@PathVariable Long id) {
+        return scheduleService.deleteSchedule(id);
+    }
 }
