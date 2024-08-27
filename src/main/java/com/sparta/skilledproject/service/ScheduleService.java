@@ -22,56 +22,27 @@ public class ScheduleService {
         schedule.setTitle(requestDto.getTitle());
         schedule.setContent(requestDto.getContent());
 
-        scheduleRepository.save(schedule);
-
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setId(schedule.getId());
-        responseDto.setUsername(schedule.getUsername());
-        responseDto.setTitle(schedule.getTitle());
-        responseDto.setContent(schedule.getContent());
-
-
-        return responseDto;
+        return new ResponseDto(scheduleRepository.save(schedule));
     }
     //조회
     public ResponseDto getScheduleById(Long id) {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Schedule not found"));
 
-        // 조회된 Schedule 엔티티를 ResponseDto로 변환하여 반환
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setId(schedule.getId());
-        responseDto.setUsername(schedule.getUsername());
-        responseDto.setTitle(schedule.getTitle());
-        responseDto.setContent(schedule.getContent());
-        responseDto.setCreatedAt(schedule.getCreatedAt());
-        responseDto.setUpdatedAt(schedule.getUpdatedAt());
-
-        return responseDto;
+        return new ResponseDto(scheduleRepository.save(schedule));
     }
 
     public ResponseDto updateSchedule(Long id, RequestDto requestDto) {
-// ID로 기존 Schedule 엔티티를 조회
+    //수정
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Schedule not found"));
 
-        // RequestDto로부터 받은 새로운 데이터로 Schedule 엔티티를 업데이트
+        schedule.setUsername(requestDto.getUsername());
         schedule.setTitle(requestDto.getTitle());
         schedule.setContent(requestDto.getContent());
-        schedule.setUpdatedAt(LocalDateTime.now());
 
-        // 업데이트된 Schedule 엔티티를 데이터베이스에 저장
-        scheduleRepository.save(schedule);
 
-        // 업데이트된 데이터를 ResponseDto로 변환하여 반환
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setId(schedule.getId());
-        responseDto.setUsername(schedule.getUsername());
-        responseDto.setTitle(schedule.getTitle());
-        responseDto.setContent(schedule.getContent());
-        responseDto.setCreatedAt(schedule.getCreatedAt());
-        responseDto.setUpdatedAt(schedule.getUpdatedAt());
+        return new ResponseDto(scheduleRepository.save(schedule));
 
-        return responseDto;
     }
 }
