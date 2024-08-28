@@ -22,10 +22,21 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "schedule_id")
+    private Long scheduleId;
 
-    private String username;
+
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "content")
     private String content;
 
     @CreatedDate
@@ -37,4 +48,8 @@ public class Schedule {
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+
+
+
 }

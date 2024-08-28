@@ -7,9 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CommentRequestDto {
-
-    private Long commentId;
-    private String author;
-    private String content;
+public class UserRequestDto {
+    private Long id;
+    private String username;
+    private String email;
 }

@@ -24,7 +24,10 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("Schedule not found"));
 
         Comment comment = new Comment();
-        comment.setAuthor(commentRequestDto.getAuthor());
+
+       comment.setAuthor(commentRequestDto.getAuthor());
+
+
         comment.setContent(commentRequestDto.getContent());
         comment.setSchedule(schedule);
 
@@ -40,7 +43,10 @@ public class CommentService {
 
     // 전체 조회
     public List<CommentResponseDto> getCommentsByScheduleId(Long scheduleId) {
-        List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
+        Schedule foundScheudle = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new RuntimeException("Schedule not found"));
+
+        List<Comment> comments = commentRepository.findBySchedule(foundScheudle);
         return comments.stream().map(CommentResponseDto::new).collect(Collectors.toList());
     }
 
@@ -49,7 +55,9 @@ public class CommentService {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Comment not found"));
 
+
         comment.setAuthor(commentRequestDto.getAuthor());
+
         comment.setContent(commentRequestDto.getContent());
 
         return new CommentResponseDto(commentRepository.save(comment));
