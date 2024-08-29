@@ -37,11 +37,12 @@ public class ScheduleController {
         return  scheduleService.updateSchedule(id, scheduleRequestDto);
     }
 
+
     //페이지네이션 스케쥴 조회
-    @GetMapping
-    public Page<ScheduleResponseDto> getSchedules(Pageable pageable) {
-        return scheduleService.getSchedules(pageable);
-    }
+//    @GetMapping
+//    public Page<ScheduleResponseDto> getSchedules(Pageable pageable) {
+//        return scheduleService.getSchedules(pageable);
+//    }
 
     //일정삭제하면 댓글도 같이 삭제
     @DeleteMapping("/delete/{id}")

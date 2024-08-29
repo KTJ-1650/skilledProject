@@ -22,9 +22,6 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-
-
-
     @Column(name = "username")
     private String username;
 
@@ -40,10 +37,12 @@ public class User {
 //유저는 많은 스케쥴을 가지고 있다.
     //스케쥴은 객체
     //List
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Schedule> schedules;
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Schedule> schedules;
 //assignee : mappedBy를 하면 외래키의 주인: 스케쥴
     //assignee 이 아니라 user가 들어가야 된다.
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private  List<Assign> assigns;
 
 }

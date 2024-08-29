@@ -26,12 +26,13 @@ public class Schedule {
     private Long scheduleId;
 
 
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+// 유저 - 담당 - 스케쥴
+    // 유저 -스케쥴 연결을 없앰 / 유저- 스케쥴 연결
     private User user;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     @Column(name = "title")
     private String title;
@@ -47,7 +48,11 @@ public class Schedule {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Assign> assigns;
+
 
 
 
